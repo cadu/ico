@@ -80,7 +80,16 @@ export default function Home() {
         setTokensToBeClaimed(BigNumber.from(amount));
       }
     } catch (err) {
-      console.error(err);
+      toast.error(
+        <div className="flex flex-col gap-2">
+          <p className="text-red-800">
+            {err}
+          </p>
+        </div>,
+        {
+          duration: 10000,
+        }
+      );
       setTokensToBeClaimed(zero);
     }
   };
@@ -165,8 +174,7 @@ export default function Home() {
       toast.error(
         <div className="flex flex-col gap-2">
           <p className="text-red-800">
-            {" "}
-            {error}
+            {err}
           </p>
         </div>,
         {
@@ -244,7 +252,6 @@ export default function Home() {
       toast.error(
         <div className="flex flex-col gap-2">
           <p className="text-red-800">
-            {" "}
             {err}
           </p>
         </div>,
@@ -278,7 +285,6 @@ export default function Home() {
       toast.error(
         <div className="flex flex-col gap-2">
           <p className="text-red-800">
-            {" "}
             Please change the network to Rinkeby
           </p>
         </div>,
@@ -309,7 +315,6 @@ export default function Home() {
       toast.error(
         <div className="flex flex-col gap-2">
           <p className="text-red-800">
-            {" "}
             {err}
           </p>
         </div>,
