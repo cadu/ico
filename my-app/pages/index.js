@@ -108,7 +108,16 @@ export default function Home() {
       // balance is already a big number, so we dont need to convert it before setting it
       setBalanceOfCryptoDevTokens(balance);
     } catch (err) {
-      console.error(err);
+      toast.error(
+        <div className="flex flex-col gap-2">
+          <p className="text-red-800">
+            {err}
+          </p>
+        </div>,
+        {
+          duration: 10000,
+        }
+      );
       setBalanceOfCryptoDevTokens(zero);
     }
   };
@@ -138,7 +147,6 @@ export default function Home() {
       // wait for the transaction to get mined
       await tx.wait();
       setLoading(false);
-
       toast.success(
         <div className="flex flex-col gap-2">
           <p className="text-green-800">
@@ -187,12 +195,30 @@ export default function Home() {
       // wait for the transaction to get mined
       await tx.wait();
       setLoading(false);
-      window.alert("Sucessfully claimed Crypto Dev Tokens");
+      toast.success(
+        <div className="flex flex-col gap-2">
+          <p className="text-green-800">
+            Sucessfully claimed Crypto Dev Tokens!
+          </p>
+        </div>,
+        {
+          duration: 10000,
+        }
+      );
       await getBalanceOfCryptoDevTokens();
       await getTotalTokensMinted();
       await getTokensToBeClaimed();
     } catch (err) {
-      console.error(err);
+      toast.error(
+        <div className="flex flex-col gap-2">
+          <p className="text-red-800">
+            {err}
+          </p>
+        </div>,
+        {
+          duration: 10000,
+        }
+      );
     }
   };
 
@@ -215,7 +241,17 @@ export default function Home() {
       const _tokensMinted = await tokenContract.totalSupply();
       setTokensMinted(_tokensMinted);
     } catch (err) {
-      console.error(err);
+      toast.error(
+        <div className="flex flex-col gap-2">
+          <p className="text-red-800">
+            {" "}
+            {err}
+          </p>
+        </div>,
+        {
+          duration: 10000,
+        }
+      );
     }
   };
   /**
@@ -239,8 +275,18 @@ export default function Home() {
     // If user is not connected to the Rinkeby network, let them know and throw an error
     const { chainId } = await web3Provider.getNetwork();
     if (chainId !== 4) {
-      window.alert("Change the network to Rinkeby");
-      throw new Error("Change network to Rinkeby");
+      toast.error(
+        <div className="flex flex-col gap-2">
+          <p className="text-red-800">
+            {" "}
+            Please change the network to Rinkeby
+          </p>
+        </div>,
+        {
+          duration: 10000,
+        }
+      );
+      throw new Error("Please change network to Rinkeby");
     }
 
     if (needSigner) {
@@ -260,7 +306,17 @@ export default function Home() {
       await getProviderOrSigner();
       setWalletConnected(true);
     } catch (err) {
-      console.error(err);
+      toast.error(
+        <div className="flex flex-col gap-2">
+          <p className="text-red-800">
+            {" "}
+            {err}
+          </p>
+        </div>,
+        {
+          duration: 10000,
+        }
+      );
     }
   };
 
